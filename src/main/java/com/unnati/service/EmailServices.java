@@ -21,6 +21,9 @@ public class EmailServices {
 		
 		
 		
+		
+	//?scckjz
+		
 		prop.put("mail.smtp.auth","true");
 		prop.put("mail.smtp.starttls.enable","true");
 		prop.put("mail.smtp.host","smtp.gamil.com");
