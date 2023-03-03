@@ -17,13 +17,7 @@ public class EmailServices {
 		final String password ="";
 		
 		Properties prop =System.getProperties();
-		
-	
-		
-		
-		
-		
-		
+	 
 		prop.put("mail.smtp.auth","true");
 		prop.put("mail.smtp.starttls.enable","true");
 		prop.put("mail.smtp.host","smtp.gamil.com");
