@@ -18,11 +18,16 @@ public class EmailServices {
 		
 		Properties prop =System.getProperties();
 		
+	
+		
+		
+		
+		
 		
 		prop.put("mail.smtp.auth","true");
 		prop.put("mail.smtp.starttls.enable","true");
 		prop.put("mail.smtp.host","smtp.gamil.com");
-		prop.put("mail.smtp.port","587");
+	 	prop.put("mail.smtp.port","587");
 		prop.put("mail.smtp.ssl.enable","false");
 		
 		Session session = Session.getInstance(prop,new Authenticator() {
