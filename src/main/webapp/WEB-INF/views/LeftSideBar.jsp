@@ -128,7 +128,7 @@
 							</a></li>
 
 
-							<li class="nav-item"><a href="listcategories"
+							<li class="nav-item"><a href="listexpense"
 								class="nav-link"> <i class="nav-icon fas fa-th"></i>
 									<p>
 										Expense
@@ -136,7 +136,7 @@
 									</p>
 							</a></li>
 
-							<li class="nav-item"><a href="listcategories"
+							<li class="nav-item"><a href="listacounttype"
 								class="nav-link"> <i class="nav-icon fas fa-th"></i>
 									<p>
 										AcountType
@@ -566,7 +566,7 @@
 				</div>
 			</div>
 		</div>
-		<div> class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable os-scrollbar-auto-hidden">
+		<div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable os-scrollbar-auto-hidden">
 			<div class="os-scrollbar-track">
 				<div class="os-scrollbar-handle"
 					style="width: 100%; transform: translate(0px, 0px);"></div>
