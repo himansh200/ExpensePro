@@ -1,5 +1,10 @@
 package com.unnati.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,12 +16,16 @@ import com.unnati.bean.LoginBean;
 import com.unnati.bean.UpdatePasswordBean;
 import com.unnati.bean.UserBean;
 import com.unnati.dao.UserDao;
+import com.unnati.service.EmailServices;
+import com.unnati.util.OtpGenerator;
 
 @Controller
 public class SessionController {
 	@Autowired
 	UserDao userDao;
 	//jsp open
+	@Autowired
+	EmailServices emailServices;
 	
 	@GetMapping("/signup")
 	public String signup() {
@@ -26,14 +35,28 @@ public class SessionController {
 	//jsp input process
 	
 	@PostMapping("/saveuser")
-	public String saveuser(UserBean user) {
+	public String saveuser(UserBean user, Model model) {
 		System.out.println(user.getFirstName());
 		System.out.println(user.getLastName());
 		System.out.println(user.getEmail());
 		System.out.println(user.getPassword());
-		userDao.insertUser(user);
+		/* userDao.insertUser(user); */
+		
+		UserBean userBean = userDao.getUserByEmail(user.getEmail());
+		if (userBean == null) {
+			// insert
+			userDao.insertUser(user);
 		
 		return "Login";
+		}
+		
+		else {
+			model.addAttribute("error","Email is already Registerd with Us");
+			return "Signup";
+		}
+		
+		
+		
 	}
 	@GetMapping("/login") // URL => Browser
 	public String login() {
@@ -42,9 +65,11 @@ public class SessionController {
 	//on submit of Login.jsp 
 	
 	@PostMapping("/authentication")
-	public String authentication(LoginBean login, Model model) {
+	public String authentication(LoginBean login, Model model,HttpServletResponse response, HttpSession session) {
 		System.out.println(login.getEmail());
 		System.out.println(login.getPassword());
+		
+		
 
 		// validation : true
 		// db -> users -> email : password match -> loginBean:email,password
@@ -56,6 +81,19 @@ public class SessionController {
 			return "Login";
 		} else {
 			// valid
+			// cookie
+			Cookie c1 = new Cookie("userId", userBean.getUserId()+"");
+			Cookie c2 = new Cookie("firstName",userBean.getFirstName());
+			// add Cookie
+			response.addCookie(c1);
+			response.addCookie(c2);
+			
+			//session
+			session.setAttribute("userId", userBean.getUserId());
+			
+			// set max interval time
+			session.setMaxInactiveInterval(60*5);
+			
 			if (userBean.getRole() == 1) {
 				// admin
 				return "redirect:/admindashboard";
@@ -82,8 +120,11 @@ public class SessionController {
 	public String forgetPassword() {
 		return "ForgetPassword";
 	}
+	
+	
+	
 
-	@PostMapping("/sendotpforforgetpassword")
+	@PostMapping("/sendotpforgetpassword")
 	public String sendOtpForForgetPassword(ForgetPasswordBean forgetPasswordBean,Model model) {
 		System.out.println(forgetPasswordBean.getEmail());
 	
@@ -92,21 +133,22 @@ public class SessionController {
 			//error 
 		model.addAttribute("error","Invalid Email");
 			return "ForgetPassword";
-	}else {
+	}
+		else {
 		//otp 
 		//generate otp
-		//int otp = (int)(Math.random()*1000000);
+	//int otp = (int)(Math.random()*1000000);
 		
 		String otp  = OtpGenerator.generateOTP(6);//XX
 		userDao.updateOtp(forgetPasswordBean.getEmail(), otp);//XX 
 			//user set --> email 
 			//send mail 
-			emailService.sendEmailForForgetPassword(forgetPasswordBean.getEmail(), otp);
-			return "redirect:/updatepasswordjspopen";
+			emailServices.sendEmailForForgetPassword(forgetPasswordBean.getEmail(), otp);
+			
+		return "redirect:/updatepasswordjspopen";
 	}
-//		
-//		
-//	}
+		
+	}
 	
 	@GetMapping("/updatepasswordjspopen")
 	public String updatePasswordJspOpen() {
@@ -128,10 +170,16 @@ public class SessionController {
 		if (user == null) {
 			return "UpdatePassword";
 		} else {
-			userDao.updateMypassword(upBean);
+			userDao.updateMyPassword(upBean);
 			return "Login";
 		}
 		
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/login";
 	}
 	
 

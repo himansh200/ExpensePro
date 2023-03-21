@@ -8,6 +8,8 @@ public class UserBean {
 	private String email;
 	private String password;
 	private int role;
+	private String otp;
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -43,6 +45,12 @@ public class UserBean {
 	}
 	public void setRole(int role) {
 		this.role = role;
+	}
+	public String getOtp() {
+		return otp;
+	}
+	public void setOtp(String otp) {
+		this.otp = otp;
 	}
 	
 	

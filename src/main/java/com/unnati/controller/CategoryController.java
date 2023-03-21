@@ -2,6 +2,9 @@ package com.unnati.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +22,27 @@ public class CategoryController {
 	CategoryDao  categoryDao;
 	
 	@GetMapping("/newcategory")   // url---- browser
-	public String newCategory()   // method
+	public String newCategory(HttpServletRequest request)   // method
 	{    
+		//cookie name 
+		//cookie userid
+		
+		int userId =-1;
+		String firstName="";
+		// read all cookies from request
+		Cookie c[] = request.getCookies();
+		
+		for(Cookie x :c) {
+			if(x.getName().equals("userId")) {
+			userId = Integer.parseInt(x.getValue());
+			}
+			if(x.getName().equals("firstName")) {
+				firstName =x.getValue();
+			}
+			
+		}
+		
+		
 		return "NewCategory";    // jsp---open
 		
 	}
@@ -52,5 +74,11 @@ public class CategoryController {
 		return "redirect:/listcategories";
 	}
 	
-	
+	@GetMapping("/viewcategory/{categoryId}")
+	public String viewCategory(@PathVariable("categoryId") Integer categoryId,Model model) {
+		CategoryBean categoryBean = categoryDao.getCategoryById(categoryId);
+		model.addAttribute("categoryBean",categoryBean);	
+		
+		return "ViewCategory";
+	}
 }

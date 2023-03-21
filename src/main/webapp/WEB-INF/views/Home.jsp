@@ -9,5 +9,7 @@
 <body>
 
 <h1>You have logged in succesfully</h1>
+<a href="addincome">Add Income</a><br><br>
+<a href="addexpense" >Add Expense</a>
 </body>
 </html>

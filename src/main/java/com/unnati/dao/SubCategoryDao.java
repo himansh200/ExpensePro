@@ -35,4 +35,9 @@ public class SubCategoryDao {
 			stmt.update(updateQuery,subCategoryId); 
 	   }
 	 
+	 public List<SubCategoryBean> getAllSubCagetgory() {
+			
+			String joinQuery = "select c.categoryName , sc.categoryId,sc.subCategoryId,sc.subCategoryName,sc.deleted from category c , subcategory sc where c.categoryId = sc.categoryId and sc.deleted = false";
+			return stmt.query(joinQuery,new BeanPropertyRowMapper<SubCategoryBean>(SubCategoryBean.class));
+		}
 }

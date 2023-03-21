@@ -5,6 +5,7 @@ public class UpdatePasswordBean {
 	private String email;
 	private String password;
 	private String otp;
+	
 	public String getEmail() {
 		return email;
 	}

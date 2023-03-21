@@ -45,6 +45,8 @@ public class UserDao {
 			return user;
 		} catch (Exception e) {
 			System.out.println("SMW --> UserDao::authenticateUser()");
+
+			
 			System.out.println(e.getMessage()); 
 		}
 		return null;
@@ -55,11 +57,11 @@ public class UserDao {
 			stmt.update(updateOtpQuery,otp,email);
 	}
 	
-	public void updateMypassword(UpdatePasswordBean upBean) {
-		String updateQuery = "update users set password = ?,otp=? where email=?";
-		stmt.update(updateQuery,upBean.getPassword(),"",upBean.getEmail());
-		
-	}
+//	public void updateMypassword(UpdatePasswordBean upBean) {
+//		String updateQuery = "update users set password = ?,otp=? where email=?";
+//		stmt.update(updateQuery,upBean.getPassword(),"",upBean.getEmail());
+//		
+//	}
 	
 	public void updateMyPassword(UpdatePasswordBean upBean) {
 		String updateQuery = "update users set password = ? , otp = ? where email = ? ";
@@ -80,4 +82,18 @@ public class UserDao {
 		}
 		return null;
 	}
+	
+	public UserBean getUserByEmail(String email) {
+		String selectQuery = "select * from users where email  = ?";
+		try {
+		return stmt.queryForObject(selectQuery, new BeanPropertyRowMapper<UserBean>(UserBean.class),
+				new Object[] { email });
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+	
+	
+	
 }

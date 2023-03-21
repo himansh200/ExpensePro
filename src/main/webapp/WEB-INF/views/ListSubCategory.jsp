@@ -21,6 +21,7 @@ List<SubCategoryBean> list =(List<SubCategoryBean>)request.getAttribute("list");
 <tr>
 	<th>SubCategory Id</th>
 	<th>SubCategory Name</th>
+	<th>CategoryName</th>
 	<th>Category Id</th>
 	<th>Deleted</th>
 	<th>Action</th>
@@ -31,6 +32,7 @@ List<SubCategoryBean> list =(List<SubCategoryBean>)request.getAttribute("list");
 	<tr>
 	<td><%=sb.getSubCategoryId() %></td>
 	<td><%=sb.getSubCategoryName() %></td>
+	<td><%=sb.getCategoryName() %></td>
 	<td><%=sb.getCategoryId() %></td>
 	<td><%=sb.getDeleted() %></td>
 	<td><a href="deletesubcategory/<%=sb.getSubCategoryId() %>">Delete</a></td>
@@ -38,4 +40,4 @@ List<SubCategoryBean> list =(List<SubCategoryBean>)request.getAttribute("list");
 	<%} %>
 </table>
 </body>
-</html>
+</html>	
