@@ -75,7 +75,7 @@ List<ExpenseBean> expenseList = (List<ExpenseBean>)request.getAttribute("expense
 	List<ExpenseBean> expenseList = (List<ExpenseBean>) request.getAttribute("expenseList");
 	%>
 
-	<jsp:include page="LeftSideBar.jsp"></jsp:include>
+	<jsp:include page="UserSideBar.jsp"></jsp:include>
 	<jsp:include page="NaiveBar.jsp"></jsp:include>
 
 
@@ -127,12 +127,12 @@ List<ExpenseBean> expenseList = (List<ExpenseBean>)request.getAttribute("expense
 												<tr>
 													<th>ExpenseId</th>
 													<th>Title</th>
-													<th>CategoryId</th>
-													<th>SubCategoryId</th>
-													<th>VendorId</th>
-													<th>AcountTypeId</th>
-													<th>StatusId</th>
-													<th>UserId</th>
+													<th>Category</th>
+													<th>SubCategory</th>
+													<th>Vendor</th>
+													<th>AcountType</th>
+													<th>Status</th>
+													<th>User</th>
 													<th>Amount</th>
 													<th>Date</th>
 													<th>Description</th>
@@ -149,11 +149,11 @@ List<ExpenseBean> expenseList = (List<ExpenseBean>)request.getAttribute("expense
 												<tr>
 													<td><%=eb.getExpenseId()%></td>
 													<td><%=eb.getTitle()%></td>
-													<td><%=eb.getCategoryId()%></td>
-													<td><%=eb.getSubCategoryId()%></td>
-													<td><%=eb.getVendorId()%></td>
-													<td><%=eb.getAcountTypeId()%></td>
-													<td><%=eb.getStatusId()%></td>
+													<td><%=eb.getCategoryName()%></td>
+													<td><%=eb.getSubCategoryName()%></td>
+													<td><%=eb.getVendorName()%></td>
+													<td><%=eb.getAcountTypePay()%></td>
+													<td><%=eb.getStatusName()%></td>
 													<td><%=eb.getUserId()%></td>
 													<td><%=eb.getAmount()%></td>
 													<td><%=eb.getDate()%></td>

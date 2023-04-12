@@ -27,10 +27,9 @@ CategoryName :<input type="text" name="categoryName">
 </head>
 
 <body>
+
 <jsp:include page="LeftSideBar.jsp"></jsp:include>
 <jsp:include page="NaiveBar.jsp"></jsp:include>
-
-
   
   
   

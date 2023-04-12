@@ -1,5 +1,8 @@
 package com.unnati.dao;
 
+import java.util.Calendar;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,9 +20,40 @@ public class UserDao {
 	
 	//add customer
 	
+	
+	
+	
+	
+	
+	public List<UserBean> getAllUsers(){
+		
+		String selectQuery ="select * from users where role=2";
+		List<UserBean> list  = stmt.query(selectQuery, new BeanPropertyRowMapper<UserBean>(UserBean.class));
+		return list;
+	}
+	
+	
+	
 	public void insertUser(UserBean userBean) {
-		String insertQuery = "insert into users(firstname, lastname ,email,password,role) values(?,?,?,?,?)";
-		stmt.update(insertQuery,userBean.getFirstName(),userBean.getLastName(),userBean.getEmail(),userBean.getPassword(),2);
+		
+Calendar c =Calendar.getInstance();
+		
+		int ddd = c.get(Calendar.DATE);
+		int mmm = c.get(Calendar.MONTH) + 1;
+		int yyy = c.get(Calendar.YEAR);
+
+		String today = "";
+
+		if (mmm < 10) {
+			today = yyy +"-0" + mmm+"-" + ddd;
+		} else {
+			today =   yyy + "-" + mmm +  "-" + ddd;
+		}
+		System.out.println("TODAY => " + today);
+		
+		
+		String insertQuery = "insert into users(firstname, lastname ,email,password,role,dob,mobileno,gender,createdAt) values(?,?,?,?,?,?,?,?,?)";
+		stmt.update(insertQuery,userBean.getFirstName(),userBean.getLastName(),userBean.getEmail(),userBean.getPassword(),2,userBean.getDob(),userBean.getMobileno(),userBean.getGender(),today);
 		
 	}
 	public UserBean authenticateUser(LoginBean loginBean) {

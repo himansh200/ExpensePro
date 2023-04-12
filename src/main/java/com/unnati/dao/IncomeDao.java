@@ -17,13 +17,21 @@ public class IncomeDao {
 
 	public void insertIncome(IncomeBean incomeBean) {
 		String insertQuery = "insert into income(title,date,userId,acountTypeId,statusId,description,amount) values(?,?,?,?,?,?,?)";
-		stmt.update(insertQuery, incomeBean.getTitle(),incomeBean.getDate(),incomeBean.getUserId(),incomeBean.getAcountTypeId(),incomeBean.getStatusId(),incomeBean.getDescription(),incomeBean.getAmount());
+		stmt.update(insertQuery, incomeBean.getTitle(), incomeBean.getDate(), incomeBean.getUserId(),
+				incomeBean.getAcountTypeId(), incomeBean.getStatusId(), incomeBean.getDescription(),
+				incomeBean.getAmount());
 	}
-	
+
+//	public List<IncomeBean> getAllIncome(Integer userId) {
+//		String selectQuery = "select * from income where userId = ? ";
+//		List<IncomeBean> incomeList = stmt.query(selectQuery, new BeanPropertyRowMapper<IncomeBean>(IncomeBean.class),new Object[] {userId});
+//		return incomeList;
+//	}
+
 	public List<IncomeBean> getAllIncome(Integer userId) {
-		String selectQuery = "select * from income where userId = ? ";
-		List<IncomeBean> incomeList = stmt.query(selectQuery, new BeanPropertyRowMapper<IncomeBean>(IncomeBean.class),new Object[] {userId});
-		return incomeList;
+		String selectQuery = "select i.title, i.amount,i.date,i.description, a.acountTypePay, s.statusName from income i, acounttype a, status s where i.acountTypeId=a.acountTypeId and s.statusId= i.statusId and userId = ?";
+		List<IncomeBean> incomelist = stmt.query(selectQuery, new BeanPropertyRowMapper<IncomeBean>(IncomeBean.class),
+				new Object[] { userId });
+		return incomelist;
 	}
 }
-

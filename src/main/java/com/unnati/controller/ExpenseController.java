@@ -48,8 +48,8 @@ public class ExpenseController {
 		System.out.println(categoryDao.getAllCategory());
 		model.addAttribute("categoryList",categoryList);
 		
-		List<SubCategoryBean> subCategoryList = subCategoryDao.getAllSubCategory();
-		System.out.println(subCategoryDao.getAllSubCategory());
+		List<SubCategoryBean> subCategoryList = subCategoryDao.getAllSubCagetgory();
+		System.out.println(subCategoryDao.getAllSubCagetgory());
 		model.addAttribute("subCategoryList",subCategoryList);
 		
 		List<VendorBean> vendorList = vendorDao.getAllVendor();

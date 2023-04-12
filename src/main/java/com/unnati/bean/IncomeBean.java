@@ -10,6 +10,8 @@ public class IncomeBean {
 	private Integer statusId;
 	private String amount;
 	private String description;
+	private String acountTypePay;
+	private String statusName;
 	public Integer getIncomeId() {
 		return incomeId;
 	}
@@ -58,7 +60,21 @@ public class IncomeBean {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public String getAcountTypePay() {
+		return acountTypePay;
+	}
+	public void setAcountTypePay(String acountTypePay) {
+		this.acountTypePay = acountTypePay;
+	}
+	public String getStatusName() {
+		return statusName;
+	}
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
+	}
 	
+	
+
 	
 	
 }

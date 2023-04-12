@@ -1,81 +1,23 @@
-<%@page import="com.unnati.bean.IncomeBean"%>
+<%@page import="com.unnati.bean.UserBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
-<%-- 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Expense | List Income</title>
-</head>
-<body>
-
-<%
-List<IncomeBean> incomeList = (List<IncomeBean>)request.getAttribute("incomeList");
-%>
-
-<table border="1">
-<tr>
-	<th>IncomeId</th>
-	<th>Title</th>
-	<th>AcountTypeId</th>
-	<th>StatusId</th>
-	<th>UserID</th>
-	<th>Amount</th>
-	<th>Date</th>
-	<th>Description</th>
-	
-	</tr>
-	
-	<% for(IncomeBean ib:incomeList){ %>
-	<tr>
-		<td><%=ib.getIncomeId() %></td>
-		<td><%=ib.getTitle() %></td>
-		<td><%=ib.getAcountTypeId()%></td>
-		<td><%=ib.getStatusId() %></td>
-		<td><%=ib.getUserId() %></td>
-		<td><%=ib.getAmount() %></td>
-		<td><%=ib.getDate() %></td>
-		<td><%=ib.getDescription() %></td>
-	</tr>
-	
-	<%} %>
-</table>
-</body>
-</html>
-
- --%>
-
-
-
-
-
-<html>
-
-<head>
+<title>Expense | Users Table</title>
 <jsp:include page="Header.jsp"></jsp:include>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
-
-
 <body>
 
 	<%
-	List<IncomeBean> incomeList = (List<IncomeBean>) request.getAttribute("incomeList");
+	List<UserBean> list = (List<UserBean>) request.getAttribute("list");
 	%>
-
-
 
 	<jsp:include page="LeftSideBar.jsp"></jsp:include>
 	<jsp:include page="NaiveBar.jsp"></jsp:include>
-
-
-
-
-
 
 
 
@@ -86,12 +28,12 @@ List<IncomeBean> incomeList = (List<IncomeBean>)request.getAttribute("incomeList
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>IncomeTables</h1>
+						<h1>Categories</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="admindashboard">Home</a></li>
-							<li class="breadcrumb-item active">IncomeTables</li>
+							<li class="breadcrumb-item active">CategoryTables</li>
 						</ol>
 					</div>
 				</div>
@@ -111,7 +53,13 @@ List<IncomeBean> incomeList = (List<IncomeBean>)request.getAttribute("incomeList
 							<div class="card-header">
 								<h3 class="card-title">DataTable with default features</h3>
 							</div>
-							<!-- /.card-header -->
+
+
+
+
+
+
+
 
 							<div class="row">
 								<div class="col-sm-12">
@@ -120,63 +68,85 @@ List<IncomeBean> incomeList = (List<IncomeBean>)request.getAttribute("incomeList
 										aria-describedby="example1_info">
 										<thead>
 											<tr>
-												<!-- <th>IncomeId</th> -->
-												<th>Title</th>
-												<th>AcountTypePay</th>
-												<th>StatusName</th>
-											<!-- 	<th>UserID</th> -->
-												<th>Amount</th>
-												<th>Date</th>
-												<th>Description</th>
+												
+												<td>FirstName</td>
+												<td>LastName</td>
+												<td>Email</td>
+												<td>Password</td>
+												
+												<td>Otp</td>
+												<td>Dob</td>
+												<td>Contact</td>
+												<td>Gender</td>
+												<td>CreatedAt</td>
 
 											</tr>
 										</thead>
 										<tbody>
 
-											<%
-											for (IncomeBean ib : incomeList) {
-											%>
+											<%for(UserBean ub :list) { %>
+
 											<tr>
 
-												<td><%=ib.getTitle()%></td>
-												<td><%=ib.getAcountTypePay()%></td>
-												<td><%=ib.getStatusName()%></td>
-												<%-- <td><%=ib.getUserId()%></td> --%>
-												<td><%=ib.getAmount()%></td>
-												<td><%=ib.getDate()%></td>
-												<td><%=ib.getDescription()%></td>
+												
+												<td><%=ub.getFirstName() %></td>
+												<td><%=ub.getLastName() %></td>
+												<td><%=ub.getEmail() %></td>
+												<td><%=ub.getPassword() %></td>
+												
+												<td><%=ub.getOtp() %></td>
+												<td><%=ub.getDob() %></td>
+												<td><%=ub.getMobileno() %></td>
+												<td><%=ub.getGender() %></td>
+												<td><%=ub.getCreatedAt()%></td>
+
+
+
 											</tr>
-
-											<%
-											}
-											%>
-
+											<%} %>
 
 										</tbody>
 
+
+
+
+
+
+
+										<!-- <tfoot>
+												<tr>
+													<th rowspan="1" colspan="1">Rendering engine</th>
+													<th rowspan="1" colspan="1">Browser</th>
+													<th rowspan="1" colspan="1">Platform(s)</th>
+													<th rowspan="1" colspan="1">Engine version</th>
+													<th rowspan="1" colspan="1">CSS grade</th>
+												</tr>
+											</tfoot> -->
 									</table>
 								</div>
 							</div>
 
 
+
 							<div class="card-footer clearfix">
-								<a href="addincome">
+								<a href="newcategory">
 									<button type="button" class="btn btn-primary float-right">
-										<i class="fas fa-plus"></i> Add Income
+										<i class="fas fa-plus"></i> Add Category
 									</button>
 								</a>
 							</div>
 
 
 
+
+
 						</div>
 					</div>
+					<!-- /.card-body -->
 				</div>
-				<!-- /.card-body -->
+				<!-- /.card -->
 			</div>
-			<!-- /.card -->
-	</div>
-	<!-- /.col -->
+			<!-- /.col -->
 	</div>
 	<!-- /.row -->
 	</div>
@@ -185,10 +155,9 @@ List<IncomeBean> incomeList = (List<IncomeBean>)request.getAttribute("incomeList
 	<!-- /.content -->
 	</div>
 
-
-
 	<jsp:include page="AllJs.jsp"></jsp:include>
-	
+
+
 	<script>
 		$(function() {
 			$("#example1").DataTable(
@@ -211,8 +180,21 @@ List<IncomeBean> incomeList = (List<IncomeBean>)request.getAttribute("incomeList
 			});
 		});
 	</script>
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
-
 </html>

@@ -108,5 +108,6 @@ Vendor Name : <input type="text" name="vendorName">
     <!-- /.content -->
   </div>
   
-  
+ </body>
+ </html> 
  

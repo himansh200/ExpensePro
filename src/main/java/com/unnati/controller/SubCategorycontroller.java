@@ -44,7 +44,7 @@ public class SubCategorycontroller {
 	@GetMapping("/listsubcategories")
 	public String listSubCategory(Model model) {
 		// pull all sub subcategory from db table 
-		List<SubCategoryBean> list = subCategoryDao.getAllSubCategory();
+		List<SubCategoryBean> list = subCategoryDao.getAllSubCagetgory();
 		System.out.println(categoryDao.getAllCategory());
 		model.addAttribute("list",list);
 		return "ListSubCategory";

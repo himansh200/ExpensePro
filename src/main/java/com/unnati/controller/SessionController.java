@@ -90,14 +90,14 @@ public class SessionController {
 			
 			//session
 			session.setAttribute("userId", userBean.getUserId());
-			
+			session.setAttribute("user", userBean);
 			// set max interval time
 			session.setMaxInactiveInterval(60*5);
 			
 			if (userBean.getRole() == 1) {
 				// admin
 				return "redirect:/admindashboard";
-			} else if (userBean.getRole() == 2) {
+	 		} else if (userBean.getRole() == 2) {
 				// buyer
 				return "redirect:/home";
 			} else {
@@ -182,5 +182,5 @@ public class SessionController {
 		return "redirect:/login";
 	}
 	
-
+	
 }
