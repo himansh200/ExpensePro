@@ -9,6 +9,7 @@
 <title>Home</title>
 
 <jsp:include page="UserHeader.jsp"></jsp:include>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 

@@ -42,7 +42,7 @@ public class CategoryDao {
 
 		try {
 			categoryBean = stmt.queryForObject("select * from category where categoryId = ?",
-					new BeanPropertyRowMapper<CategoryBean>(CategoryBean.class), new Object[] { categoryId });
+					new BeanPropertyRowMapper<CategoryBean>(CategoryBean.class), new Object[] {categoryId});
 		} catch (Exception e) {
 			System.out.println("CategoryDao :: getCategoryById()");
 			System.out.println(e.getMessage());
@@ -51,11 +51,19 @@ public class CategoryDao {
 	}
    
    
-   
+   public void updateCategory1(CategoryBean categoryBean) {
+	   
+	   String updateQuery = "Update category Set categoryName = ? where categoryId = ? ";
+	   stmt.update(updateQuery, categoryBean.getCategoryName(),categoryBean.getCategoryId());
+	  System.out.println(categoryBean.getCategoryId());
+	   System.out.println(categoryBean.getCategoryName());
+	   
+   }
    
    //update
    
    
    //delete
+   
    
 }

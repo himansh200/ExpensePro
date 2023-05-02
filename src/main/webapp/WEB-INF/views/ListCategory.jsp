@@ -132,8 +132,23 @@ List<CategoryBean> list = (List<CategoryBean>) request.getAttribute("list");
 											
 											
 											
-											<a href="deletecategory/<%=cb.getCategoryId()%>">Delete</a>
-												| <a href="viewcategory/<%=cb.getCategoryId()%>">View</a></td>
+											<a href="deletecategory/<%=cb.getCategoryId()%>"><i class="fas fa-trash">
+                                          </i></a>
+												| <a  href="viewcategory/<%=cb.getCategoryId()%>"><i class="fas fa-folder">
+                                                   </i>View</a>
+												
+												
+											
+                             				
+											
+												|<a href="editcategory?categoryId=<%=cb.getCategoryId()%>">
+												<i  class="fas fa-edit"></i></a>
+												
+												
+												
+												
+												
+												</td>
 										</tr>
 										<%
 										}

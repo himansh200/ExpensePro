@@ -4,16 +4,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Expense | Profile</title>
-
+<title>Expense | UserProfile</title>
 <jsp:include page="Header.jsp"></jsp:include>
-
 </head>
-
 <body>
+<jsp:include page="UserSideBar.jsp"></jsp:include>
 <jsp:include page="NaiveBar.jsp"></jsp:include>
 
-<jsp:include page="LeftSideBar.jsp"></jsp:include>
+
 
 
 
@@ -37,7 +35,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="admindashboard">Home</a></li>
+              <li class="breadcrumb-item"><a href="home">Home</a></li>
               <li class="breadcrumb-item active">User Profile</li>
             </ol>
           </div>
@@ -52,7 +50,7 @@
           <div class="col-md-3">
 
             <!-- Profile Image -->
-            <form action= "saveprofilepic" method="post" enctype="multipart/form-data">
+            <form action= "saveuserprofilepic" method="post" enctype="multipart/form-data">
             
             <input type="hidden" name="userId" value="${user.userId}">
             <div class="card card-primary card-outline">
@@ -150,7 +148,7 @@
                   <!-- /.tab-pane -->
 
                   <div class="tab-pane active" id="settings">
-                    <form  action="saveprofile"  method="post">
+                    <form  action="saveuserprofil"  method="post">
                      <input type="hidden" name="userId" value="${user.userId}">
                       <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label">FirstName</label>
@@ -216,6 +214,9 @@
   </div>
 
 <jsp:include page="AllJs.jsp"></jsp:include>
+
+
+
 
 </body>
 </html>

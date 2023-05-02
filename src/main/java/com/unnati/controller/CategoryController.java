@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.unnati.bean.CategoryBean;
 import com.unnati.dao.CategoryDao;
@@ -22,7 +23,7 @@ public class CategoryController {
 	CategoryDao categoryDao;
 
 	@GetMapping("/newcategory")
-			// url---- browser
+	// url---- browser
 	public String newCategory(HttpServletRequest request) // method
 	{
 		// cookie name
@@ -72,25 +73,41 @@ public class CategoryController {
 		return "redirect:/listcategories";
 	}
 
-	
-	  @GetMapping("/viewcategory/{categoryId}") public String
-	  viewCategory(@PathVariable("categoryId") Integer categoryId, Model model) {
-	  CategoryBean categoryBean = categoryDao.getCategoryById(categoryId);
-	  model.addAttribute("categoryBean", categoryBean);
-	  
-	  return "ViewCategory";
-	  
-	  }
-	 
-	
-	
-	
-	
+	@GetMapping("/viewcategory/{categoryId}")
+	public String viewCategory(@PathVariable("categoryId") Integer categoryId, Model model) {
+		CategoryBean categoryBean = categoryDao.getCategoryById(categoryId);
+		model.addAttribute("categoryBean", categoryBean);
 
-	/*
-	 * @GetMapping("/editcategory") public String editCatrgory() {
-	 * 
-	 * 
-	 * return "EditCategory"; }
-	 */
+		return "ViewCategory";
+
+	}
+
+	@GetMapping("/editcategory")
+
+	public String editCategory(@RequestParam("categoryId") Integer categoryId, Model model) {
+
+		CategoryBean categoryBean = categoryDao.getCategoryById(categoryId);
+		System.out.println(categoryBean.getCategoryId());
+		model.addAttribute("categoryBean",categoryBean);
+		
+		
+		
+		
+		
+		return "EditCategory";
+	}
+
+	
+	@PostMapping("/updatecategory")
+	public String updateCategory(CategoryBean categoryBean) {
+		categoryDao.updateCategory1(categoryBean);
+		System.out.println(categoryBean.getCategoryName());
+		return "redirect:/listcategories";
+	}
+	
+	
+	
+	
+	
+	
 }

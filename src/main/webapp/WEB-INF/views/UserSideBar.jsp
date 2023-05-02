@@ -2,12 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 
    
-<div class="preloader flex-column justify-content-center align-items-center" style="height: 0px;">
-    <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60" style="display: none;">
-  </div>   
-   
-   
-   
+
    
    
    
@@ -32,10 +27,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="${user.imageUrl}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">${cookie.firstName.value}</a>
+          <a href="myuserprofile" class="d-block">${cookie.firstName.value}</a>
         </div>
       </div>
 
@@ -276,7 +271,7 @@
           
           
           
-          
+         
           
           
           
@@ -298,3 +293,6 @@
     </div></div></div><div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable os-scrollbar-auto-hidden"><div class="os-scrollbar-track"><div class="os-scrollbar-handle" style="width: 100%; transform: translate(0px, 0px);"></div></div></div><div class="os-scrollbar os-scrollbar-vertical os-scrollbar-auto-hidden"><div class="os-scrollbar-track"><div class="os-scrollbar-handle" style="height: 91.2371%; transform: translate(0px, 0px);"></div></div></div><div class="os-scrollbar-corner"></div></div>
     <!-- /.sidebar -->
   </aside>
+  
+    
+<jsp:include page="UserJs.jsp"></jsp:include>

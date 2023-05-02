@@ -7,11 +7,15 @@
 	</a>
 
 	<!-- Sidebar -->
+	
 	<div
 		class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition">
 		<div class="os-resize-observer-host observed">
 			<div class="os-resize-observer" style="left: 0px; right: auto;"></div>
 		</div>
+		
+		
+		
 		<div class="os-size-auto-observer observed"
 			style="height: calc(100% + 1px); float: left;">
 			<div class="os-resize-observer"></div>
@@ -26,7 +30,7 @@
 					<!-- Sidebar user panel (optional) -->
 					<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 						<div class="image">
-							<img src="dist/img/user2-160x160.jpg"
+							<img src="${user.imageUrl}"
 								class="img-circle elevation-2" alt="User Image">
 						</div>
 						<div class="info">
@@ -159,12 +163,15 @@
 								</div>
 			</div>
 		</div>
+	<!-- 	
 		<div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable os-scrollbar-auto-hidden">
 			<div class="os-scrollbar-track">
 				<div class="os-scrollbar-handle"
 					style="width: 100%; transform: translate(0px, 0px);"></div>
 			</div>
 		</div>
+		 -->
+	<!-- 	
 		<div
 			class="os-scrollbar os-scrollbar-vertical os-scrollbar-auto-hidden">
 			<div class="os-scrollbar-track">
@@ -172,7 +179,10 @@
 					style="height: 47.6041%; transform: translate(0px, 0px);"></div>
 			</div>
 		</div>
-		<div class="os-scrollbar-corner"></div>
+		 -->
+		<!-- <div class="os-scrollbar-corner"></div> -->
 	</div>
 	<!-- /.sidebar -->
 </aside>
+
+

@@ -189,7 +189,7 @@
           <!-- /.col -->
           <div class="col-4" >
           <!--  <button type="submit" class="btn btn-primary btn-block" value ="Signup" onclick="validation()">Register</button>  -->
-        	 <input type="button" value="Signup" onclick="validation()"><br><br> 
+        	 <input type="button" class="btn btn-primary float-right" value="Signup" onclick="validation()"><br><br> 
           </div>
           <!-- /.col -->
         </div>
@@ -322,7 +322,6 @@ function  validation(){
 
 
 </script>
-
 
 
 <!-- jQuery -->

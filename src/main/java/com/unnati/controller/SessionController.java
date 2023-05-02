@@ -1,11 +1,15 @@
 package com.unnati.controller;
 
+import java.io.File;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.unnati.bean.ForgetPasswordBean;
 import com.unnati.bean.LoginBean;
+import com.unnati.bean.ProfileBean;
 import com.unnati.bean.UpdatePasswordBean;
 import com.unnati.bean.UserBean;
+import com.unnati.dao.AdminDao;
 import com.unnati.dao.UserDao;
 import com.unnati.service.EmailServices;
 import com.unnati.util.OtpGenerator;
@@ -26,6 +32,11 @@ public class SessionController {
 	//jsp open
 	@Autowired
 	EmailServices emailServices;
+	
+	
+	@Autowired
+	AdminDao adminDao;
+	
 	
 	@GetMapping("/signup")
 	public String signup() {
@@ -106,11 +117,13 @@ public class SessionController {
 		}
 
 	}
-	@GetMapping("/home")
-	public String home() {
-		return "Home";
-	}
-
+	
+	
+	/*
+	 * @GetMapping("/home") public String home() {
+	 * 
+	 * return "Home"; }
+	 */
 	@GetMapping("/")
 	public String root() {
 		return "Login";
@@ -181,6 +194,63 @@ public class SessionController {
 		session.invalidate();
 		return "redirect:/login";
 	}
+	
+	
+	
+
+	@GetMapping("/myuserprofile")
+	public String myProfile(Model model) {
+		
+		
+		return "MyUserProfile";
+	}
+	
+	
+	@PostMapping("/saveuserprofilepic")
+	public String saveProfilePic(ProfileBean profileBean) {
+	
+	System.out.println(profileBean.getUserId());
+//	System.out.println(profileBean.getProfileImg().getOriginalFilename());
+	
+	try {
+		File userDir = new File(
+				"C:\\Users\\DELL 3000 SERIES\\Documents\\workspace-spring-tool-suite-4-4.17.2.RELEASE\\Expense\\src\\main\\resources\\static\\dist\\profiles",
+				profileBean.getUserId() + "");
+		if (userDir.exists() == false) {
+			userDir.mkdir();
+		}
+		File file = new File(userDir, profileBean.getProfileImg().getOriginalFilename());
+		FileUtils.writeByteArrayToFile(file, profileBean.getProfileImg().getBytes());
+		profileBean.setImageUrl("dist/profiles/" + profileBean.getUserId() + "/"
+				+ profileBean.getProfileImg().getOriginalFilename());
+		
+		adminDao.updateImageUrl(profileBean);
+		
+	} catch (Exception e) {
+	 e.printStackTrace();
+
+	}
+		
+		return "redirect:/myuserprofile" ;
+	}
+	
+	
+	
+	
+	
+	
+	 @PostMapping("/saveuserprofile")
+	 public String myUserProfilePic(UserBean userBean) {
+		 System.out.println(userBean.getUserId());
+			adminDao.updateProfile(userBean);
+			System.out.println(userBean.getLastName());
+			
+			
+			
+			return "redirect:/myuserprofile" ;
+	 }
+	
+	
 	
 	
 }
